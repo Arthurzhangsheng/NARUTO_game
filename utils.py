@@ -176,5 +176,5 @@ def save_confg(indicies, input_size, fp):
         'indices': indicies,
         'input_size': input_size
     }
-    with open(fp, 'w') as f:
-        json.dump(config, f)
+    with open(fp, 'w', encoding='UTF-8') as f:
+        json.dump(config, f,ensure_ascii=False)
