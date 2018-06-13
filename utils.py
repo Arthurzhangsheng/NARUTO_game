@@ -38,16 +38,20 @@ def process_videos(fps, target_size):
             path for path in (video_dir / ctg).iterdir() if path.is_file()
         ]#创建一个列表，保存某个文件夹里的所有视频名字
         for video in videos:
-            print('正在处理{}'.format(video))
-            # 从视频中提取图片
-            imgs = img_generator(video, fps)#从指定的视频文件中，按指定的fps来读取图片的路径
-            for i, img in enumerate(imgs):#依次获取imgs的图片路径名字来读取图片
-                # resize to target_size
-                
-                img = img.resize(target_size)#重新定图片尺寸
-                img_name = '{}_{}.jpg'.format(video.stem, i)#生成图片的名字
-                img_path = image_dir / ctg / img_name#生成图片的保存位置 data/image/xu/xu_35.jpg
-                img.save(img_path)#保存图片
+            try:
+                print('正在处理{}'.format(video))
+                # 从视频中提取图片
+                imgs = img_generator(video, fps)#从指定的视频文件中，按指定的fps来读取图片的路径
+                for i, img in enumerate(imgs):#依次获取imgs的图片路径名字来读取图片
+                    # resize to target_size
+                    
+                    img = img.resize(target_size)#重新定图片尺寸
+                    img_name = '{}_{}.jpg'.format(video.stem, i)#生成图片的名字
+                    img_path = image_dir / ctg / img_name#生成图片的保存位置 data/image/xu/xu_35.jpg
+                    img.save(img_path)#保存图片
+            except:
+                print("处理{}时遇到神秘bug，跳过此文件".format(video))
+                continue
     # 创建train, val, test及其子目录
     train_dir = base_dir / 'train'#先生成文件夹的位置信息
     val_dir = base_dir / 'val'
