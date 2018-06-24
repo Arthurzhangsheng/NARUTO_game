@@ -13,6 +13,7 @@
 * imageio
 * numpy
 * json
+* pygame
 
 ## 使用方法
 用jupyternotebook打开tutorial.ipynb文件，按照里面的提示，一步一步运行
